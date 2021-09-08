@@ -1,0 +1,13 @@
+---
+- name: Shutdown servers
+  hosts: all
+  gather_facts: no
+
+  become: yes
+  become_user: root
+  become_method: su
+
+  tasks:
+    - name: Shutting down..
+      raw: poweroff
+
