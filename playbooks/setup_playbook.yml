@@ -1,0 +1,30 @@
+---
+- name: Setup for Alphine Linux by Isaac Sapelino
+  hosts: all
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: su
+
+  vars:
+    alphine_apk: apk
+
+  pre_tasks:
+    - name: Installing python to servers
+      raw: "{{ alphine_apk }} add python3"
+
+  tasks:
+    - name: Installing bash
+      apk:
+        name: bash
+        state: latest
+        update_cache: yes
+
+    - name: Installing git
+      apk:
+        name: git
+        state: latest
+        update_cache: yes
+
+
+

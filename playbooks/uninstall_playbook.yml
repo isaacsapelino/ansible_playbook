@@ -1,0 +1,29 @@
+---
+- name: Uninstall setup from Alpine Linux by Isaac Sapelino
+  hosts: all
+  gather_facts: no
+
+  become: yes
+  become_user: root
+  become_method: su
+
+  vars:
+    alpine_apk: apk
+
+  tasks:
+    - name: Uninstaling git
+      apk:
+        name: git
+        state: absent
+
+    - name: Uninstalling bash
+      apk:
+        name: bash
+        state: absent
+
+  post_tasks:
+    - name: Uninstall python3
+      raw: "{{ alpine_apk }} del python3"
+
+    - shell: echo Done uninstalling.
+
